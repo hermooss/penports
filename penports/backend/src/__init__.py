@@ -1,14 +1,14 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from routes import init_routes
+from src.routes import init_routes
 
 
 
 db = SQLAlchemy()
 
-def create_app():
+def create_app(config_class='src.config.Config'):
     app = Flask(__name__)
-    app.config.from_object('config.Config')
+    app.config.from_object(config_class)
     db.init_app(app)
 
     init_routes(app)
