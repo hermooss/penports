@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Register</title>
+    <title>Login</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -32,8 +32,7 @@
             margin-bottom: 1.5rem;
         }
 
-        .form-container input,
-        .form-container select {
+        .form-container input {
             width: 100%;
             padding: 0.8rem;
             margin: 1rem 0;
@@ -79,7 +78,7 @@
 
     <div class="container">
         <div class="form-container">
-            <h2>Create an Account</h2>
+            <h2>Login</h2>
 
             <!-- Display any flashed messages (error or success) -->
             {% with messages = get_flashed_messages(with_categories=true) %}
@@ -92,17 +91,17 @@
                 {% endif %}
             {% endwith %}
 
-            <!-- Register Form -->
-            <form action="{{ url_for('register') }}" method="POST">
-                {{ form.hidden_tag() }}  <!-- Include CSRF token -->
+            <!-- Login Form -->
+            <form action="{{ url_for('login') }}" method="POST">
+                {{ form.hidden_tag() }}  <!-- CSRF token -->
 
-                <!-- Username -->
+                <!-- Username or Email -->
                 <div>
-                    <label for="username">Username:</label>
-                    {{ form.username(class="form-control") }}  <!-- Render the username field -->
-                    {% if form.username.errors %}
+                    <label for="username_or_email">Username or Email:</label>
+                    {{ form.username_or_email(class="form-control") }}  <!-- Render the username or email field -->
+                    {% if form.username_or_email.errors %}
                         <ul>
-                            {% for error in form.username.errors %}
+                            {% for error in form.username_or_email.errors %}
                                 <li class="error">{{ error }}</li>
                             {% endfor %}
                         </ul>
@@ -122,52 +121,13 @@
                     {% endif %}
                 </div>
 
-                <!-- Confirm Password -->
-                <div>
-                    <label for="confirm_password">Confirm Password:</label>
-                    {{ form.confirm_password(class="form-control") }}  <!-- Render the confirm password field -->
-                    {% if form.confirm_password.errors %}
-                        <ul>
-                            {% for error in form.confirm_password.errors %}
-                                <li class="error">{{ error }}</li>
-                            {% endfor %}
-                        </ul>
-                    {% endif %}
-                </div>
-
-                <!-- Email -->
-                <div>
-                    <label for="email">Email:</label>
-                    {{ form.email(class="form-control") }}  <!-- Render the email field -->
-                    {% if form.email.errors %}
-                        <ul>
-                            {% for error in form.email.errors %}
-                                <li class="error">{{ error }}</li>
-                            {% endfor %}
-                        </ul>
-                    {% endif %}
-                </div>
-
-                <!-- Role -->
-                <div>
-                    <label for="role">Role:</label>
-                    {{ form.role(class="form-control") }}  <!-- Render the role select field -->
-                    {% if form.role.errors %}
-                        <ul>
-                            {% for error in form.role.errors %}
-                                <li class="error">{{ error }}</li>
-                            {% endfor %}
-                        </ul>
-                    {% endif %}
-                </div>
-
                 <!-- Submit Button -->
                 <div>
-                    <button type="submit">Register</button>
+                    <button type="submit">Login</button>
                 </div>
             </form>
 
-            <p>Already have an account? <a href="{{ url_for('login') }}">Login here</a></p>
+            <p>Don't have an account? <a href="{{ url_for('register') }}">Register here</a></p>
         </div>
     </div>
 
