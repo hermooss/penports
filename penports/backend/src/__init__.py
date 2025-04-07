@@ -1,18 +1,17 @@
 from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
-from src.routes import init_routes
+from flask_migrate import Migrate
+
+app = Flask(__name__)
+app.config.from_object('src.config.Config')
+
+from src.models import db
+from src.routes import *
+
+migrate = Migrate(app, db)
 
 
+with app.app_context():
 
-db = SQLAlchemy()
+    db.create_all()
+    print("Creating all tables...")
 
-def create_app(config_class='src.config.Config'):
-    app = Flask(__name__)
-    app.config.from_object(config_class)
-    db.init_app(app)
-
-    init_routes(app)
-    with app.app_context():
-        db.create_all()
-
-    return app

@@ -1,8 +1,7 @@
-from flask import Flask 
-from src import create_app
+from src import app
+
 
 def main():
-    app = create_app()
     app.run(debug=True)
 
 

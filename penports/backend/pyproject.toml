@@ -13,7 +13,8 @@ dependencies = [
     "flask-wtf (>=1.2.2,<2.0.0)",
     "flask-security (>=5.6.1,<6.0.0)",
     "flask-sqlalchemy (>=3.1.1,<4.0.0)",
-    "psycopg2 (>=2.9.10,<3.0.0)"
+    "psycopg2 (>=2.9.10,<3.0.0)",
+    "flask-migrate (>=4.1.0,<5.0.0)",
 ]
 
 [tool.poetry]
