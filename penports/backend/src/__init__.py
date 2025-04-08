@@ -8,6 +8,8 @@ app.config.from_object('src.config.Config')
 @app.before_request
 def make_session_permanent():
     session.permanent = True
+
+    
 csrf = CSRFProtect(app)
 
 
