@@ -145,6 +145,17 @@ def pentester():
     return render_template('pentester_home.html', user = user, form=form, reports = reports )
 
 
+@app.route('/home/client')
+def client():
+    if 'user_id' not in session :
+        flash("Accès réservé aux client", "error")
+        return redirect(url_for('login'))
+    
+    user = User.query.filter(User.id == session['user_id']).first()
+
+    reports = user.accessible_reports.all()
+    return render_template('client_home.html', user = user, reports=reports)
+
 
 
 
