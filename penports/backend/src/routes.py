@@ -47,10 +47,10 @@ def register():
             db.session.commit()
         else:
             flash("Les deux mots de passe ne sont pas identique", "error")
-            return render_template("register.html", form=form)
+            return redirect(url_for('register'))
 
         
-        return redirect('/')
+        return redirect(url_for('login'))
     return render_template('register.html', form = form)
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -68,7 +68,7 @@ def login():
             return redirect('/home')
         else:
             flash('Invalid credentials', 'error')
-            return render_template('login.html', form = form)
+            return redirect(url_for('login'))
 
     return render_template('login.html', form = form)
 
